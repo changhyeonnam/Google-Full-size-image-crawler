@@ -52,9 +52,10 @@ if __name__ == '__main__':
             urllib.request.urlretrieve(imgUrl, f"{search}/" + search + "_" + str(count) + ".jpg")
             print(f"Image saved: {search}_{count}.jpg")
             # we can not use enumerate function. because there are passed case.
-            count+=1
-            if (count == total_image_count+1):
+            if (count == total_image_count):
                 break
+            else:
+                count+=1
         except:
             pass
     print(f'{"*"*50}Crawlling Completed.{"*"*50}')
