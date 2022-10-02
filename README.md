@@ -1,7 +1,8 @@
 # Google Full size image crawler
+This repo is for crawling full size image in the google search.
 
 ### Development Environment
-- WEB : Chrome
+- WEB : Chrome Version 106.0.5249.91 (Official Build) (x86_64)
 - OS : MAC
 - IDE : Pycharm
 
