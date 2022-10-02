@@ -8,14 +8,17 @@ from selenium.webdriver.common.by import By
 
 
 if __name__ == '__main__':
-    if not os.path.isdir("nike/"):
-        os.makedirs("nike/")
-    PATH="./chromedriver"
+    PATH = "./chromedriver"
     driver = webdriver.Chrome(executable_path=PATH)
     driver.get("https://www.google.co.kr/imghp?hl=ko&ogbl")
 
-    search = "nike"
-    elem = driver.find_element(By.NAME,"q")
+    search = input('Please enter a search term: ')
+    total_image_count = int(input('Enter the total number: '))
+
+    if not os.path.isdir(f"{search}/"):
+        os.makedirs(f"{search}/")
+
+    elem = driver.find_element(By.NAME, "q")
     elem.send_keys(search)
     elem.send_keys(Keys.RETURN)
 
@@ -30,23 +33,26 @@ if __name__ == '__main__':
 
         if new_height == last_height:
             try:
-                driver.find_element(By.CSS_SELECTOR,".mye4qd").click()
+                driver.find_element(By.CSS_SELECTOR, ".mye4qd").click()
             except:
                 break
         last_height = new_height
 
-    images = driver.find_elements(By.CSS_SELECTOR,".rg_i.Q4LuWd")
-    count = 1
+    images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
 
-    for image in images:
+    copied_xpath='//*[@id="Sva75c"]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div[3]/div/a/img'
+
+    for idx, image in enumerate(images):
+        if (idx == total_image_count):
+            break
         try:
             image.click()
             time.sleep(2)
-            imgUrl = driver.find_element(By.XPATH,"//*[@id='Sva75c']/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div[3]/div/a/img").get_attribute('src')
-            urllib.request.urlretrieve(imgUrl, "nike/" + search + "_" + str(count) + ".jpg")
-            print("Image saved: nike_{}.jpg".format(count))
-            count += 1
+            imgUrl = driver.find_element(By.XPATH,
+                                         copied_xpath).get_attribute('src')
+            urllib.request.urlretrieve(imgUrl, f"{search}/" + search + "_" + str(idx+1) + ".jpg")
+            print(f"Image saved: {search}_{idx+1}.jpg")
         except:
             pass
-
+    print(f'{"*"*50}Crawlling Completed.{"*"*50}')
     driver.close()
