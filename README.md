@@ -53,7 +53,7 @@ Image saved: pikachu_5.jpg
 ```
 
 ### output 
-![img_3.png](pikachu/pikachu_1.png)
+![pikachu.jpg](pikachu/pikachu_1.jpg)
 
 ### Info
 - I'm not sure but copied xpath can be reused for different search term.
