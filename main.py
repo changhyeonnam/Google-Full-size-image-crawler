@@ -7,22 +7,12 @@ import os
 from selenium.webdriver.common.by import By
 
 
-if __name__ == '__main__':
-    PATH = "./chromedriver"
-    driver = webdriver.Chrome(executable_path=PATH)
-    driver.get("https://www.google.co.kr/imghp?hl=ko&ogbl")
-
-    search = input('Please enter a search term: ')
-    total_image_count = int(input('Enter the total number: '))
-
-    if not os.path.isdir(f"{search}/"):
-        os.makedirs(f"{search}/")
-
+def google_scroll(SCROLL_PAUSE_TIME,search):
     elem = driver.find_element(By.NAME, "q")
     elem.send_keys(search)
     elem.send_keys(Keys.RETURN)
 
-    SCROLL_PAUSE_TIME = 1
+    SCROLL_PAUSE_TIME = SCROLL_PAUSE_TIME
 
     last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -38,9 +28,8 @@ if __name__ == '__main__':
                 break
         last_height = new_height
 
+def url_retrieve(copied_xpath, total_image_count):
     images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
-
-    copied_xpath='//*[@id="Sva75c"]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div[3]/div/a/img'
     print(f'{"*"*50}Crawlling started.{"*"*50}')
     count = 1
     for image in images:
@@ -60,3 +49,20 @@ if __name__ == '__main__':
             pass
     print(f'{"*"*50}Crawlling Completed.{"*"*50}')
     driver.close()
+
+if __name__ == '__main__':
+    PATH = "./chromedriver"
+    driver = webdriver.Chrome(executable_path=PATH)
+    driver.get("https://www.google.co.kr/imghp?hl=ko&ogbl")
+
+    search = input('Please enter a search term: ')
+    total_image_count = int(input('Enter the total number: '))
+
+    if not os.path.isdir(f"{search}/"):
+        os.makedirs(f"{search}/")
+
+    copied_xpath='//*[@id="Sva75c"]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div[3]/div/a/img'
+
+    google_scroll(SCROLL_PAUSE_TIME=1, search=search)
+    url_retrieve(copied_xpath=copied_xpath, total_image_count=total_image_count)
+
