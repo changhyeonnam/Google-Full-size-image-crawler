@@ -52,6 +52,9 @@ Image saved: pikachu_5.jpg
 **************************************************Crawlling Completed.**************************************************
 ```
 
+### output 
+![img_3.png](pikachu/pikachu_1.png)
+
 ### Info
 - I'm not sure but copied xpath can be reused for different search term.
 - I guess that when chrome is updated or google updated their search engine, we should copy again.
