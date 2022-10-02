@@ -41,17 +41,20 @@ if __name__ == '__main__':
     images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
 
     copied_xpath='//*[@id="Sva75c"]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div[3]/div/a/img'
-
-    for idx, image in enumerate(images):
-        if (idx == total_image_count):
-            break
+    print(f'{"*"*50}Crawlling started.{"*"*50}')
+    count = 1
+    for image in images:
         try:
             image.click()
             time.sleep(2)
             imgUrl = driver.find_element(By.XPATH,
                                          copied_xpath).get_attribute('src')
-            urllib.request.urlretrieve(imgUrl, f"{search}/" + search + "_" + str(idx+1) + ".jpg")
-            print(f"Image saved: {search}_{idx+1}.jpg")
+            urllib.request.urlretrieve(imgUrl, f"{search}/" + search + "_" + str(count) + ".jpg")
+            print(f"Image saved: {search}_{count}.jpg")
+            # we can not use enumerate function. because there are passed case.
+            count+=1
+            if (count == total_image_count+1):
+                break
         except:
             pass
     print(f'{"*"*50}Crawlling Completed.{"*"*50}')

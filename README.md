@@ -1,10 +1,14 @@
 # Google Full size image crawler
 
 ### Development Environment
-- web : Chrome
+- WEB : Chrome
 - OS : MAC
 - IDE : Pycharm
 
+### Dependency
+```
+selenium == 4.4.3
+```
 ### How to use crawler
 1. Download suitable chrome driver. <p>Follow this [link](https://chromedriver.chromium.org/downloads).</p>
 2. You should specify PATH in `webdriver.Chrome()`
@@ -28,9 +32,25 @@
    ```
 5. Run the code!. <p>Follow command like this.</p>
    ```python
+   python main.py
+   
    Please enter a search term: jordon white white
    Enter the total number: 50
    ```
 
+### Example
+```python
+Please enter a search term: pikachu
+Enter the total number: 5
+**************************************************Crawlling started.**************************************************
+Image saved: pikachu_1.jpg
+Image saved: pikachu_2.jpg
+Image saved: pikachu_3.jpg
+Image saved: pikachu_4.jpg
+Image saved: pikachu_5.jpg
+**************************************************Crawlling Completed.**************************************************
+```
+
+
 ### reference
-- [link](https://velog.io/@ishikawakanata/Selenium%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EA%B5%AC%EA%B8%80-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%9B%90%EB%B3%B8%EC%9C%BC%EB%A1%9C-%ED%81%AC%EB%A1%A4%EB%A7%81%ED%95%98%EA%B8%B0) : written in korean
+- [link](https://velog.io/@ishikawakanata/Selenium%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EA%B5%AC%EA%B8%80-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%9B%90%EB%B3%B8%EC%9C%BC%EB%A1%9C-%ED%81%AC%EB%A1%A4%EB%A7%81%ED%95%98%EA%B8%B0)(written in korean)
