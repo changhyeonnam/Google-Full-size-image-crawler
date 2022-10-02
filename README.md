@@ -52,7 +52,7 @@ Image saved: pikachu_5.jpg
 **************************************************Crawlling Completed.**************************************************
 ```
 
-### output 
+### Output 
 ![pikachu.jpg](pikachu/pikachu_1.jpg)
 
 ### Info
