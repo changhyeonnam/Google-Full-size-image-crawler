@@ -1,7 +1,8 @@
 # Google Full size image crawler
+This repo is for crawling full size image in the google search.
 
 ### Development Environment
-- WEB : Chrome
+- WEB : Chrome Version 106.0.5249.91 (Official Build) (x86_64)
 - OS : MAC
 - IDE : Pycharm
 
@@ -50,6 +51,9 @@ Image saved: pikachu_4.jpg
 Image saved: pikachu_5.jpg
 **************************************************Crawlling Completed.**************************************************
 ```
+
+### Output 
+![pikachu.jpg](pikachu/pikachu_1.jpg)
 
 ### Info
 - I'm not sure but copied xpath can be reused for different search term.
