@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from selenium import webdriver
 from urllib.request import urlopen
 from selenium.webdriver.common.keys import Keys
@@ -5,6 +7,8 @@ import time
 import urllib.request
 import os
 from selenium.webdriver.common.by import By
+import ssl
+import requests
 
 
 def google_scroll(SCROLL_PAUSE_TIME,search):
@@ -34,23 +38,35 @@ def url_retrieve(copied_xpath, total_image_count):
     count = 1
     for image in images:
         try:
-            image.click()
+            try:
+                image.click()
+            except:
+                try:
+                    driver.execute_script("arguments[0].click();", image)
+                except:
+                    pass
             time.sleep(2)
             imgUrl = driver.find_element(By.XPATH,
                                          copied_xpath).get_attribute('src')
-            urllib.request.urlretrieve(imgUrl, f"{search}/" + search + "_" + str(count) + ".jpg")
+            r = requests.get(imgUrl)
+            with open(f"{search}/" + search + "_" + str(count) + ".jpg", mode="wb") as f:
+                f.write(r.content)
+
             print(f"Image saved: {search}_{count}.jpg")
             # we can not use enumerate function. because there are passed case.
             if (count == total_image_count):
                 break
             else:
                 count+=1
-        except:
+        except Exception as e:
+            print(e)
             pass
     print(f'{"*"*50}Crawlling Completed.{"*"*50}')
     driver.close()
 
 if __name__ == '__main__':
+    ssl._create_default_https_context = ssl._create_unverified_context
+
     PATH = "./chromedriver"
     driver = webdriver.Chrome(executable_path=PATH)
     driver.get("https://www.google.co.kr/imghp?hl=ko&ogbl")
@@ -65,4 +81,3 @@ if __name__ == '__main__':
 
     google_scroll(SCROLL_PAUSE_TIME=1, search=search)
     url_retrieve(copied_xpath=copied_xpath, total_image_count=total_image_count)
-
