@@ -48,9 +48,11 @@ def url_retrieve(copied_xpath, total_image_count):
             time.sleep(2)
             imgUrl = driver.find_element(By.XPATH,
                                          copied_xpath).get_attribute('src')
-            r = requests.get(imgUrl)
-            with open(f"{search}/" + search + "_" + str(count) + ".jpg", mode="wb") as f:
-                f.write(r.content)
+            # opener = urllib.request.build_opener()
+            # opener.addheaders = [('User-Agent',
+            #                       'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
+            # urllib.request.install_opener(opener)
+            urllib.request.urlretrieve(url=imgUrl,filename=f"{search}/" + search + "_" + str(count) + ".jpg")
 
             print(f"Image saved: {search}_{count}.jpg")
             # we can not use enumerate function. because there are passed case.
@@ -59,7 +61,6 @@ def url_retrieve(copied_xpath, total_image_count):
             else:
                 count+=1
         except Exception as e:
-            print(e)
             pass
     print(f'{"*"*50}Crawlling Completed.{"*"*50}')
     driver.close()
@@ -67,12 +68,12 @@ def url_retrieve(copied_xpath, total_image_count):
 if __name__ == '__main__':
     ssl._create_default_https_context = ssl._create_unverified_context
 
+    search = input('Please enter a search term: ')
+    total_image_count = int(input('Enter the total number: '))
+
     PATH = "./chromedriver"
     driver = webdriver.Chrome(executable_path=PATH)
     driver.get("https://www.google.co.kr/imghp?hl=ko&ogbl")
-
-    search = input('Please enter a search term: ')
-    total_image_count = int(input('Enter the total number: '))
 
     if not os.path.isdir(f"{search}/"):
         os.makedirs(f"{search}/")
