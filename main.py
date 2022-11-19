@@ -36,6 +36,7 @@ def url_retrieve(copied_xpath, total_image_count):
     images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
     print(f'{"*"*50}Crawlling started.{"*"*50}')
     count = 1
+    TIME_LIMIT = 5
     for image in images:
         try:
             try:
@@ -45,14 +46,10 @@ def url_retrieve(copied_xpath, total_image_count):
                     driver.execute_script("arguments[0].click();", image)
                 except:
                     pass
-            time.sleep(2)
+
             imgUrl = driver.find_element(By.XPATH,
                                          copied_xpath).get_attribute('src')
-            # opener = urllib.request.build_opener()
-            # opener.addheaders = [('User-Agent',
-            #                       'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
-            # urllib.request.install_opener(opener)
-            urllib.request.urlretrieve(url=imgUrl,filename=f"{search}/" + search + "_" + str(count) + ".jpg")
+            urllib.request.urlretrieve(url=imgUrl, filename=f"{search}/" + search + "_" + str(count) + ".jpg")
 
             print(f"Image saved: {search}_{count}.jpg")
             # we can not use enumerate function. because there are passed case.
@@ -78,7 +75,7 @@ if __name__ == '__main__':
     if not os.path.isdir(f"{search}/"):
         os.makedirs(f"{search}/")
 
-    copied_xpath='//*[@id="Sva75c"]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div[3]/div/a/img'
+    copied_xpath='//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img'
 
     google_scroll(SCROLL_PAUSE_TIME=1, search=search)
     url_retrieve(copied_xpath=copied_xpath, total_image_count=total_image_count)
