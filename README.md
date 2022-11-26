@@ -58,6 +58,3 @@ Image saved: pikachu_5.jpg
 ### Info
 - I'm not sure but copied xpath can be reused for different search term.
 - I guess that when chrome is updated or google updated their search engine, we should copy again.
-
-### reference
-- [link](https://velog.io/@ishikawakanata/Selenium%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EA%B5%AC%EA%B8%80-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%9B%90%EB%B3%B8%EC%9C%BC%EB%A1%9C-%ED%81%AC%EB%A1%A4%EB%A7%81%ED%95%98%EA%B8%B0)(written in korean)
